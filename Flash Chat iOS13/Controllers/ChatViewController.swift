@@ -94,10 +94,15 @@ extension ChatViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
+
         let message = messages[indexPath.row]
 
         let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath) as! MessageCellTableViewCell
                cell.label.text = message.body
+        
+        cell.transform = CGAffineTransform(scaleX: 1, y: -1)
+        tableView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: tableView.bounds.size.width - 10)
         
         if message.sender == Auth.auth().currentUser?.email {
             cell.rightImageView.isHidden = false
